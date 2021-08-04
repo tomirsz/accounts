@@ -2,7 +2,9 @@ package com.accounts.mapper;
 
 import com.accounts.model.dto.AccountDto;
 import com.accounts.model.entity.Account;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountMapper {
 
     public AccountDto mapToAccountDto(Account account) {
