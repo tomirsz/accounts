@@ -1,5 +1,6 @@
 package com.accounts.service;
 
+import com.accounts.mapper.AccountMapper;
 import com.accounts.model.dto.AccountDto;
 import com.accounts.repository.AccountRepository;
 import lombok.AllArgsConstructor;
@@ -13,15 +14,11 @@ import java.util.stream.Collectors;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    private final AccountMapper accountMapper;
 
     public List<AccountDto> fetchCustomerAccounts(long customerId) {
         return accountRepository.findAllByCustomerId(customerId).stream()
-                .map(a -> AccountDto.builder()
-                        .id(a.getId())
-                        .nrb(a.getNrb())
-                        .currency(a.getCurrency())
-                        .availableFunds(a.getFounds())
-                        .build())
+                .map(accountMapper::mapToAccountDto)
                 .collect(Collectors.toList());
     }
 }
