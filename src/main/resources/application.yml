@@ -21,6 +21,8 @@ info:
   serverInfo:
     port: ${server.port}
 
+eureka:
+  client: ${eureka-client}
+
 application:
   allow-get-accounts: ${application.allow-get-accounts}
-
