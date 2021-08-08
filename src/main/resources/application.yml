@@ -26,3 +26,6 @@ eureka:
 
 application:
   allow-get-accounts: ${application.allow-get-accounts}
+
+server:
+  port: 9998
