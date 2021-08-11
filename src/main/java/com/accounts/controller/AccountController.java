@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+
 @Slf4j
 @RefreshScope
 @RestController("/v1")
@@ -32,5 +34,12 @@ public class AccountController {
             throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Getting account is disabled");
         }
         return ResponseEntity.ok(GetAccountsResponse.of(accountService.fetchCustomerAccounts(customerId)));
+    }
+
+    @GetMapping("/account/fetch-founds")
+    public ResponseEntity<BigDecimal> fetchFounds(@RequestParam(name="nrb") String nrb) {
+        return accountService.fetchFounds(nrb)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.badRequest().build());
     }
 }
